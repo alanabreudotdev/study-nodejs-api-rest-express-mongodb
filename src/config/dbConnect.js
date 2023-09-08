@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
+import 'dotenv/config'
 
-mongoose.connect("mongodb+srv://<USER>:<PASS>@perebasdb.wxhxkbn.mongodb.net/alura-node");
+let mongoUser = process.env.MONGOUSER;
+let mongoPass = process.env.MONGOPASS;
 
-let db = mongoose.connection;
+async function conectaDatabase() {
+  mongoose.connect(`mongodb+srv://${mongoUser}:${mongoPass}@perebasdb.wxhxkbn.mongodb.net/alura-node`);
 
-export default db
+  return mongoose.connection;
+}
+
+export default conectaDatabase
+
